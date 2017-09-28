@@ -1,0 +1,61 @@
+Source: golang-google-cloud
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Uploaders: Martín Ferrari <tincho@debian.org>,
+           Michael Stapelberg <stapelberg@debian.org>,
+           Tim Potter <tpot@hpe.com>,
+Section: devel
+Priority: optional
+Build-Depends: debhelper (>= 10),
+               dh-golang (>= 1.17~),
+               golang-any,
+               golang-github-golang-mock-dev (>= 1.0.0),
+               golang-github-googleapis-gax-go-dev (>= 0.0~git20170902.8c160ca),
+               golang-golang-x-net-dev,
+               golang-golang-x-oauth2-google-dev,
+               golang-golang-x-time-dev,
+               golang-google-api-dev (>= 0.0~git20170907.b1ecfb3),
+               golang-google-appengine-dev,
+               golang-google-genproto-dev,
+               golang-google-grpc-dev (>= 1.6.0),
+               golang-goprotobuf-dev,
+Standards-Version: 4.1.0
+Homepage: https://cloud.google.com/go/home
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-go/packages/golang-google-cloud.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-go/packages/golang-google-cloud.git
+Xs-Go-Import-Path: cloud.google.com/go
+Testsuite: autopkgtest-pkg-go
+
+Package: golang-google-cloud-dev
+Architecture: all
+Depends: golang-github-golang-mock-dev (>= 1.0.0),
+         golang-github-googleapis-gax-go-dev (>= 0.0~git20170902.8c160ca),
+         golang-golang-x-net-dev,
+         golang-golang-x-oauth2-google-dev,
+         golang-golang-x-time-dev,
+         golang-google-api-dev (>= 0.0~git20170907.b1ecfb3),
+         golang-google-appengine-dev,
+         golang-google-cloud-compute-metadata-dev (= ${source:Version}),
+         golang-google-genproto-dev,
+         golang-google-grpc-dev (>= 1.6.0),
+         golang-goprotobuf-dev,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Google Cloud Platform APIs
+ Package cloud contains Google Cloud Platform APIs related types and common
+ functions.
+ .
+ Provides both the old google.golang.org/cloud and the new cloud.google.com/go
+ trees.
+
+Package: golang-google-cloud-compute-metadata-dev
+Architecture: all
+Depends: golang-golang-x-net-dev,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Google Cloud Platform APIs (only cloud/compute/metadata)
+ This package contains only google.golang.org/cloud/compute/metadata, which is
+ required by other packages (such as golang-golang-x-oauth2-dev), hence useful
+ to split out to break circular dependencies.
+ .
+ Provides both the old google.golang.org/cloud and the new cloud.google.com/go
+ trees.

@@ -1,0 +1,130 @@
+golang-google-cloud (0.9.0-2) unstable; urgency=high
+
+  * Disable more flaky tests, as package is still failing to build some times.
+
+ -- Martín Ferrari <tincho@debian.org>  Wed, 20 Sep 2017 12:33:09 +0000
+
+golang-google-cloud (0.9.0-1) unstable; urgency=medium
+
+  [ Martín Ferrari ]
+  * debian/control: Update Standards-Version (no changes).
+  * debian/control: Mark package as autopkgtest-able.
+  * debian/control: Remove unneded versioned deps.
+  * debian/copyright: Format uses http protocol instead of https.
+  * Add watch file.
+
+  [ Shengjing Zhu ]
+  * New upstream release (Closes: #873514)
+  * Refresh patches
+    + Drop 0001-Bug#840311-fix-test-timeouts.patch
+    + Drop 0002-Failing_test.patch
+    + Rework patch that disable network access in testing
+  * Update new Build-Depends
+    + Add golang-github-golang-mock-dev Build-Depends
+    + Bump golang-google-grpc-dev to 1.6.0
+    + Bump golang-github-googleapis-gax-go-dev to 0.0~git20170902.8c160ca
+    + Bump golang-google-api-dev to 0.0~git20170907.b1ecfb3
+  * Update compat and dh to 10
+  * Update pkg-go team name
+  * Change priority to optional
+  * No more internal/cloud.go in golang-google-cloud-compute-metadata-dev
+  * Run short test only
+
+ -- Martín Ferrari <tincho@debian.org>  Wed, 20 Sep 2017 09:02:31 +0000
+
+golang-google-cloud (0.5.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * Fix FTBFS on 32 bit. (Closes: #860699)
+
+ -- Dr. Tobias Quathamer <toddy@debian.org>  Thu, 27 Apr 2017 22:30:57 +0200
+
+golang-google-cloud (0.5.0-1) unstable; urgency=medium
+
+  * Start following upstream history (branch upstream-ng), using the new
+    repository.
+  * Switch to the new cloud.google.com/go tree, and provide a compatibility
+    tree.
+  * New upstream release. Closes: #846322
+  * Update patches.
+  * Update dependencies.
+  * Ensure the transition from symlink to directory is handled correctly.
+    Closes: #846799
+  * Disable test which accesses the network.
+
+ -- Martín Ferrari <tincho@debian.org>  Fri, 16 Dec 2016 18:32:29 +0000
+
+golang-google-cloud (0.0~git20160615-6) unstable; urgency=medium
+
+  * Remove compatibility symlinks, as those clash with golang's rules about
+    internal packages. Closes: 844074.
+  * Instead, duplicate the source tree and replace all references to the old
+    import path.
+  * Depend on latest version of x/oauth2/google to avoid more circular dep
+    problems.
+
+ -- Martín Ferrari <tincho@debian.org>  Sat, 19 Nov 2016 05:43:11 +0000
+
+golang-google-cloud (0.0~git20160615-5) unstable; urgency=medium
+
+  * Use Xs-Go-Import-Path.
+  * Try to simplify a bit the packaging.
+  * Remove unneeded patch, instead install testdata.
+  * Remove canonical import paths, so compatibility symlinks can be used.
+  * Add compatibility symlinks for google.golang.org/cloud.
+  * Update x/net package name.
+
+ -- Martín Ferrari <tincho@debian.org>  Fri, 04 Nov 2016 17:22:49 +0000
+
+golang-google-cloud (0.0~git20160615-4) unstable; urgency=medium
+
+  * Add myself to Uploaders.
+  * debian/control: Remove golang-go dependency from -dev package.
+  * debian/control: Replace golang-go with golang-any in Build-Depends.
+  * Increase timeouts in tests to avoid build failures. Closes: #840311.
+
+ -- Martín Ferrari <tincho@debian.org>  Fri, 21 Oct 2016 17:42:30 +0000
+
+golang-google-cloud (0.0~git20160615-3) unstable; urgency=medium
+
+  * Team upload.
+  * Fix bad install dependencies in d/control.
+
+ -- Tim Potter <tpot@hpe.com>  Wed, 05 Oct 2016 15:44:09 +1100
+
+golang-google-cloud (0.0~git20160615-2) unstable; urgency=medium
+
+  * Team upload.
+  * Fix bad B-D's in d/control.
+
+ -- Tim Potter <tpot@hpe.com>  Tue, 27 Sep 2016 11:37:06 +1000
+
+golang-google-cloud (0.0~git20160615-1) unstable; urgency=medium
+
+  [ Paul Tagliamonte ]
+  * Team upload.
+  * Use a secure transport for the Vcs-Git and Vcs-Browser URL
+
+  [ Tim Potter ]
+  * Newer upstream snapshot (Closes: #835742)
+
+ -- Tim Potter <tpot@hpe.com>  Tue, 06 Sep 2016 12:18:36 +1000
+
+golang-google-cloud (0.0~git20160413-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream snapshot (Closes: #823475)
+  * Build golang-google-compute-dev package
+  * Standards-Version: 3.9.8
+  * Use https for VCS-Browser field
+  * Don't use Built-Using for -dev packages
+  * Add docs file for both binary packages
+  * Add examples
+
+ -- Tim Potter <tpot@hpe.com>  Tue, 17 May 2016 12:15:42 +1000
+
+golang-google-cloud (0.0~git20150613-1) unstable; urgency=medium
+
+  * Initial release (Closes: #788778)
+
+ -- Michael Stapelberg <stapelberg@debian.org>  Sun, 14 Jun 2015 00:21:22 +0200

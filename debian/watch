@@ -1,0 +1,6 @@
+version=3
+
+opts="filenamemangle=s/(?:.*\/)?v?([^\/]+)\.tar\.gz/golang-google-cloud-$1.tar.gz/,\
+dversionmangle=s/\+ds\d*$//,uversionmangle=s/rc/~rc/" \
+    https://github.com/GoogleCloudPlatform/google-cloud-go/tags \
+    (?:.*/)?v?(\d[\d\.]*(?:rc\d*)?)\.tar\.gz

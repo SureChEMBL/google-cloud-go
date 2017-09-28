@@ -1,0 +1,3 @@
+0001-Fix-FTBFS-on-32-bit.patch
+0002-skip-test-needing-network.patch
+0003-skip-radmon-failed-tests.patch

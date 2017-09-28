@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+# There used to be a compatibility symlink, now replaced by a directory.
+if dpkg-maintscript-helper supports symlink_to_dir; then
+    dpkg-maintscript-helper symlink_to_dir \
+        /usr/share/gocode/src/cloud.google.com/go ../google.golang.org/cloud \
+        0.5.0-1~ golang-google-cloud-compute-metadata-dev -- "$@"
+fi
+
+#DEBHELPER#
+
+exit 0

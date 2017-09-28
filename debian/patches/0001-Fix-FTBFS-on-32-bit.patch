@@ -1,0 +1,22 @@
+From: Shengjing Zhu <i@zhsj.me>
+Date: Thu, 7 Sep 2017 14:15:49 +0800
+Subject: Fix FTBFS on 32 bit
+
+Signed-off-by: Shengjing Zhu <i@zhsj.me>
+---
+ pubsub/endtoend_test.go | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pubsub/endtoend_test.go b/pubsub/endtoend_test.go
+index 8acd7fd..6f38c86 100644
+--- a/pubsub/endtoend_test.go
++++ b/pubsub/endtoend_test.go
+@@ -218,7 +218,7 @@ func (c *consumer) process(_ context.Context, m *Message) {
+ 	c.recv <- struct{}{}
+ 	// Simulate time taken to process m, while continuing to process more messages.
+ 	// Some messages will need to have their ack deadline extended due to this delay.
+-	delay := rand.Intn(int(ackDeadline * 3))
++	delay := rand.Int63n(int64(ackDeadline * 3))
+ 	time.AfterFunc(time.Duration(delay), m.Ack)
+ }
+ 

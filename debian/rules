@@ -1,0 +1,55 @@
+#!/usr/bin/make -f
+
+# vision has new dependencies, skip for now.
+export DH_GOLANG_EXCLUDES := examples/ cmd/go-cloud-debug-agent vision
+export DH_GOLANG_INSTALL_EXTRA := bigtable/testdata datastore/testdata \
+	storage/testdata vision/testdata
+
+%:
+	dh $@ --buildsystem=golang --with=golang --builddir=$(BUILDDIR)
+
+OLDIPATH := google.golang.org/cloud
+IPATH := cloud.google.com/go
+BUILDDIR := $(CURDIR)/build
+
+override_dh_auto_configure:
+	# Prevent dh-golang from creating a symlink here.
+	mkdir -p `dirname $(BUILDDIR)/src/$(OLDIPATH)`
+	dh_auto_configure
+	# Remove examples.
+	rm -vrf $(BUILDDIR)/src/$(IPATH)/examples
+	# Duplicate source tree into new namespace, for compatibility during
+	# transition.
+	rm -f $(BUILDDIR)/src/$(OLDIPATH)
+	mkdir -vp $(BUILDDIR)/src/$(OLDIPATH)
+	cp -avT $(BUILDDIR)/src/$(IPATH) $(BUILDDIR)/src/$(OLDIPATH)
+	find $(BUILDDIR)/src/$(OLDIPATH) -name \*.go \
+	    -exec sed -i 's#\<$(IPATH)\>#$(OLDIPATH)#' {} \;
+
+override_dh_auto_build:
+	dh_auto_build
+	# Also build the duplicated tree.
+	DH_GOPKG=$(OLDIPATH) dh_auto_build
+
+override_dh_auto_test:
+	dh_auto_test -- -short
+	# Also test the duplicated tree.
+	DH_GOPKG=$(OLDIPATH) dh_auto_test -- -short
+
+override_dh_auto_install:
+	dh_auto_install
+	# Also install the duplicated tree.
+	DH_GOPKG=$(OLDIPATH) dh_auto_install
+
+PKG1 := golang-google-cloud-dev
+PKG2 := golang-google-cloud-compute-metadata-dev
+PREFIX := usr/share/gocode/src
+
+override_dh_install:
+	dh_install
+	# Move compute/metadata files into separate package.
+	for path in $(IPATH) $(OLDIPATH); do \
+	    mkdir -vp debian/$(PKG2)/$(PREFIX)/$$path/; \
+	    mv -v debian/$(PKG1)/$(PREFIX)/$$path/compute/ \
+		debian/$(PKG2)/$(PREFIX)/$$path; \
+	done
