@@ -5,7 +5,7 @@ Uploaders: Martín Ferrari <tincho@debian.org>,
            Tim Potter <tpot@hpe.com>,
 Section: devel
 Priority: optional
-Build-Depends: debhelper (>= 10),
+Build-Depends: debhelper (>= 9),
                dh-golang (>= 1.17~),
                golang-any,
                golang-github-golang-mock-dev (>= 1.0.0),
